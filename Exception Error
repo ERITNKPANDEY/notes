@@ -1,0 +1,98 @@
+Error : 
+cannot be loaded because running scripts is disabled on this system. For more information, see 
+about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ npm install -g expo-cli
++ ~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+
+Solution :
+
+Hello Everyone! Today in this Note I am going to step by step guide you
+✻ I really hope you find this Note useful. ♥
+We can solve this using these 3 easy steps...
+
+Step 1:First, you have to need to open the command prompt and run this command.
+set-ExecutionPolicy RemoteSigned -Scope CurrentUser 
+
+Step 2: Now you have to run the second command on your system. This command is:
+Get-ExecutionPolicy
+
+Step 3: To view their policy, you need to run this command in your command prompt:
+Get-ExecutionPolicy -list
+
+That's all... And there you go! Your problem got Solved!!
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+note for understanding
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to Fix the "PS1 Cannot Be Loaded Because Running Scripts is Disabled on This System" Error
+If you're encountering the error message "PS1 Cannot Be Loaded Because Running Scripts is Disabled on This System" or something similar while running a script in PowerShell, it typically means that your system has restricted script execution for security reasons. By default, Windows PowerShell restricts running unsigned scripts to protect against potentially malicious code. However, you can adjust your system's execution policy to allow scripts to run. Here’s how to resolve the issue:
+
+Step 1: Check Your Current Execution Policy
+Before making any changes, it's good practice to check what your current execution policy is. To do this, follow these steps:
+
+Open PowerShell by pressing Win + X and selecting Windows PowerShell (Admin).
+
+In the PowerShell window, type the following command:
+
+powershell
+Copy
+Get-ExecutionPolicy
+This will display the current execution policy. Common values include:
+
+Restricted (no scripts can run)
+RemoteSigned (local scripts can run, but scripts downloaded from the internet need to be signed by a trusted publisher)
+Unrestricted (no restrictions on running scripts)
+Step 2: Modify the Execution Policy
+To fix the error, you'll need to change the execution policy. There are several options depending on your needs. Here's how you can modify the execution policy:
+
+Open PowerShell as Administrator:
+
+Press Win + X and select Windows PowerShell (Admin).
+Change the Execution Policy:
+
+To allow local scripts to run, type the following command to set the policy to RemoteSigned:
+
+powershell
+Copy
+Set-ExecutionPolicy RemoteSigned
+If you want to completely remove restrictions and allow all scripts to run, use Unrestricted:
+
+powershell
+Copy
+Set-ExecutionPolicy Unrestricted
+Confirm the Change:
+
+After entering the command, you’ll be prompted to confirm the change. Type Y and press Enter to accept the change.
+
+Note: If you don't want to be prompted every time, you can use the -Force flag to bypass the confirmation:
+
+powershell
+Copy
+Set-ExecutionPolicy RemoteSigned -Force
+Step 3: Verify the Change
+After modifying the execution policy, you can verify that the changes were applied by running the following command again:
+
+powershell
+Copy
+Get-ExecutionPolicy
+It should now reflect the updated policy (either RemoteSigned or Unrestricted).
+
+Step 4: Try Running the Script Again
+Now that you've adjusted the execution policy, try running your script again. The error "PS1 Cannot Be Loaded Because Running Scripts is Disabled on This System" should no longer appear.
+
+Additional Notes:
+Security Considerations: While the Unrestricted policy allows all scripts to run without restrictions, it can potentially allow harmful scripts to execute. It's generally safer to use RemoteSigned, which allows local scripts to run but requires that scripts from the internet are signed by a trusted publisher.
+
+Scope of the Execution Policy: You can also change the execution policy for different scopes:
+
+Process: Affects only the current PowerShell session.
+CurrentUser: Affects the current user account.
+LocalMachine: Affects all users on the system.
+To set the policy for the current user, for example, you can use:
+
+powershell
+Copy
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+By following these steps, you should be able to resolve the "PS1 Cannot Be Loaded Because Running Scripts is Disabled on This System" error and run your scripts without issues.
